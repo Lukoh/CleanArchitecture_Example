@@ -77,6 +77,13 @@ public class RepositoryActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
     }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Caller.INSTANCE.unBindService(this);
+    }
 
     @Override
     protected void setViews(Bundle savedInstanceState) {
