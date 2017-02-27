@@ -22,6 +22,21 @@ public enum Caller {
     INSTANCE;
 
     public static final String EXTRA_PROFILE = "github:profile";
+    
+    private ServiceConnection mServiceConnection = new ServiceConnection(new ServiceConnectionCallback() {
+        @Override
+        public void onServiceConnected(CustomTabsClient client) {
+            client.warmup(0);
+
+            CustomTabsSession session = client.newSession(new CustomTabsCallback());
+            session.mayLaunchUrl(Uri.parse(mUrl), null, null);
+        }
+
+        @Override
+        public void onServiceDisconnected() {
+        }
+
+    });
 
     private Intent createIntent(Context context, Class<?> cls, boolean isNewTask) {
         Intent intent = new Intent(context, cls);
@@ -66,22 +81,12 @@ public enum Caller {
         CustomTabsIntent customTabsIntent = builder.build();
         String packageName = CustomTabsHelper.getPackageNameToUse(context);
         CustomTabsHelper.addKeepAliveExtra(context, customTabsIntent.intent);
-        CustomTabsClient.bindCustomTabsService(context, packageName,
-                new ServiceConnection(new ServiceConnectionCallback() {
-                    @Override
-                    public void onServiceConnected(CustomTabsClient client) {
-                        client.warmup(0);
-
-                        CustomTabsSession session = client.newSession(new CustomTabsCallback());
-                        session.mayLaunchUrl(Uri.parse(url), null, null);
-                    }
-
-                    @Override
-                    public void onServiceDisconnected() {
-                    }
-
-                }));
+        CustomTabsClient.bindCustomTabsService(context, packageName, mServiceConnection);
 
         customTabsIntent.launchUrl(context, Uri.parse(url));
+    }
+    
+    public void unBindService(Context context) {
+        context.unbindService(mServiceConnection);
     }
 }
