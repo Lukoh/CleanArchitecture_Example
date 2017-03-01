@@ -71,6 +71,12 @@ public class RepositoryPresenter implements RepositoryContract.Presenter {
     @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(RepositoryEvent event) {
+        if (event.getResponseClient() == null) {
+            event.getView().showErrorMessage(event.getMessage());
+
+            return;
+        }
+
         event.getView().addItems(mSort.sort(event.getResponseClient(), new RepositoryComparator()),
                 false);
     }

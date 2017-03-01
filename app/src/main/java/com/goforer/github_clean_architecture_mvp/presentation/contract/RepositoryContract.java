@@ -14,6 +14,7 @@ public interface RepositoryContract {
 
         void getRepositoryList(String userName, boolean enabledSort);
 
+        @SuppressWarnings("unused")
         void clear();
     }
 }

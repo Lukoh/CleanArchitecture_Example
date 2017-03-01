@@ -40,6 +40,12 @@ public class SplashPresenter implements SplashContract.Presenter {
     @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserProfileEvent event) {
+        if (event.getResponseClient() == null) {
+            event.getView().showErrorMessage(event.getMessage());
+
+            return;
+        }
+
         event.getView().setUserProfile(event.getResponseClient());
     }
 }
