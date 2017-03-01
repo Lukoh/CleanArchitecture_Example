@@ -3,6 +3,7 @@ package com.goforer.github_clean_architecture_mvp.repository.communicator.callba
 import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryAdapterContract.View;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.Repository;
 import com.goforer.github_clean_architecture_mvp.presentation.model.event.ResponseRepositoryEvent;
+import com.goforer.github_clean_architecture_mvp.repository.communicator.RequestClient;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,6 +31,7 @@ public class RequestRepositoryCallback implements Callback<List<Repository>> {
                            retrofit2.Response<List<Repository>> response) {
         if (mEvent != null) {
             mEvent.setResponseClient(response.body());
+            mEvent.setMessage(RequestClient.SUCCESS);
             mEvent.parseInResponse();
             mEvent.setView(mView);
             EventBus.getDefault().post(mEvent);
@@ -40,6 +42,9 @@ public class RequestRepositoryCallback implements Callback<List<Repository>> {
     public void onFailure(Call<List<Repository>> call, Throwable t) {
         if (mEvent != null) {
             EventBus.getDefault().post(mEvent);
+            mEvent.setResponseClient(null);
+            mEvent.setMessage(t.getMessage());
+            mEvent.setView(mView);
         }
     }
 }

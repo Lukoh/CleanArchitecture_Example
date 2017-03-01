@@ -21,7 +21,7 @@ import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 
 
-public class Github_MVP_TEST extends MultiDexApplication {
+public class Github_Clean_Architecture extends MultiDexApplication {
     private static final String TAG = "Zimgo";
 
     @SuppressLint("StaticFieldLeak")
@@ -42,7 +42,7 @@ public class Github_MVP_TEST extends MultiDexApplication {
                 Thread.UncaughtExceptionHandler exceptionHandler =
                         Thread.getDefaultUncaughtExceptionHandler();
                 try {
-                    exceptionHandler = new ExceptionHandler(Github_MVP_TEST.this, exceptionHandler,
+                    exceptionHandler = new ExceptionHandler(Github_Clean_Architecture.this, exceptionHandler,
                             new ExceptionHandler.OnFindCrashLogListener() {
 
                                 @Override
@@ -124,7 +124,7 @@ public class Github_MVP_TEST extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(Github_MVP_TEST.this);
+        MultiDex.install(Github_Clean_Architecture.this);
     }
 
     @Override

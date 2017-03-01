@@ -21,6 +21,8 @@ import com.goforer.github_clean_architecture_mvp.presentation.view.activity.Repo
 public enum Caller {
     INSTANCE;
 
+    private String mUrl;
+
     public static final String EXTRA_PROFILE = "github:profile";
     
     private ServiceConnection mServiceConnection = new ServiceConnection(new ServiceConnectionCallback() {
@@ -66,15 +68,17 @@ public enum Caller {
     }
 
     public void callChromeCustomTabs(Context context, final String url) {
+        mUrl = url;
+
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setCloseButtonIcon(BitmapFactory.decodeResource(
                 context.getResources(), R.drawable.ic_close));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             builder.setToolbarColor(context.getResources()
-                    .getColor(R.color.colorZimgo, null)).setShowTitle(true);
+                    .getColor(R.color.colorPrimary, null)).setShowTitle(true);
         } else {
             builder.setToolbarColor(context.getResources()
-                    .getColor(R.color.colorZimgo)).setShowTitle(true);
+                    .getColor(R.color.colorPrimary)).setShowTitle(true);
         }
 
         builder.enableUrlBarHiding();

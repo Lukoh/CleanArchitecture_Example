@@ -13,7 +13,7 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/colorZimgo</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
     <!-- LIGHT DARK ACTIONBAR -->

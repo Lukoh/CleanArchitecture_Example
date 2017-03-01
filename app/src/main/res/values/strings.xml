@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Github_MVP</string>
+    <string name="app_name">Github_</string>
     <string name="not_connected_internet">No Internet connection</string>
     <string name="check_connection">Check your connection again</string>
     <string name="toast_no_data">No data available.</string>

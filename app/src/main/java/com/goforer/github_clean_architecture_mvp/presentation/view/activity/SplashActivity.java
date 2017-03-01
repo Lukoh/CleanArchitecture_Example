@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.goforer.base.presentation.utils.CommonUtils;
 import com.goforer.base.presentation.view.activity.BaseActivity;
 import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.github_clean_architecture_mvp.presentation.Github_Clean_Architecture;
 import com.goforer.github_clean_architecture_mvp.presentation.caller.Caller;
 import com.goforer.github_clean_architecture_mvp.presentation.contract.SplashContract;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.User;
@@ -67,6 +68,17 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     public void setUserProfile(User user) {
         moveToMain(user);
+    }
+
+    @Override
+    public void showErrorMessage(String errorMessage) {
+        CommonUtils.showToastMessage(this, errorMessage, Toast.LENGTH_SHORT);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Github_Clean_Architecture.closeApplication();
+            }
+        }, Toast.LENGTH_SHORT);
     }
 
     private void onWait() {

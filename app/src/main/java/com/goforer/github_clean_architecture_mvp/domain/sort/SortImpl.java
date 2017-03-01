@@ -1,6 +1,5 @@
 package com.goforer.github_clean_architecture_mvp.domain.sort;
 
-
 import com.goforer.github_clean_architecture_mvp.domain.interactor.Sort;
 
 import java.util.Collections;

@@ -18,6 +18,8 @@ public enum RequestClient {
     private static final long WRITE_TIME_OUT = 5;
     private static final long CONNECT_TIME_OUT = 5;
 
+    public static final String SUCCESS = "SUCCESS";
+
     private RequestMethod mRequestor;
 
     private String mRawResponseBody;

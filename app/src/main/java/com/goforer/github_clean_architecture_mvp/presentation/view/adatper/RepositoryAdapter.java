@@ -3,6 +3,7 @@ package com.goforer.github_clean_architecture_mvp.presentation.view.adatper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.goforer.base.presentation.view.holder.BaseViewHolder;
 import com.goforer.base.presentation.view.holder.DefaultViewHolder;
 import com.goforer.base.presentation.view.view.SquircleImageView;
 import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.github_clean_architecture_mvp.presentation.Github_Clean_Architecture;
 import com.goforer.github_clean_architecture_mvp.presentation.caller.Caller;
 import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryAdapterContract;
 import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryContract;
@@ -171,6 +173,18 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
         mFragment.doneRefreshing();
     }
 
+    @Override
+    public void showErrorMessage(String errorMessage) {
+        CommonUtils.showToastMessage(mContext, errorMessage, Toast.LENGTH_SHORT);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Github_Clean_Architecture.closeApplication();
+            }
+        }, Toast.LENGTH_SHORT);
+
+    }
+
     private final static class RepositoryViewHolder extends BaseViewHolder<Repository> {
         private View mView;
 
@@ -191,7 +205,7 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
             holder.getView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (repository.getHomepage() == null) {
+                    if (repository.getHomepage() == null || "".equals(repository.getHomepage())) {
                         CommonUtils.showToastMessage(getContext(),
                                 getContext().getString(R.string.no_homepage), Toast.LENGTH_SHORT);
                         return;
