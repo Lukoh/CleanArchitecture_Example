@@ -7,9 +7,6 @@ import com.goforer.base.presentation.model.BaseModel;
 import com.google.gson.annotations.SerializedName;
 
 public class Repository extends BaseModel implements Parcelable {
-    public static final int LIST_TITLE_TYPE = 0;
-    public static final int LIST_ITEM_TYPE = 1;
-
     @SerializedName("id")
     private long mId;
     @SerializedName("name")
