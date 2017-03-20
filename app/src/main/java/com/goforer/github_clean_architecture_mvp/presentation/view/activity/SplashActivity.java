@@ -1,5 +1,6 @@
 package com.goforer.github_clean_architecture_mvp.presentation.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -11,8 +12,13 @@ import com.goforer.github_clean_architecture_mvp.R;
 import com.goforer.github_clean_architecture_mvp.presentation.Github_Clean_Architecture;
 import com.goforer.github_clean_architecture_mvp.presentation.caller.Caller;
 import com.goforer.github_clean_architecture_mvp.presentation.contract.SplashContract;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.component.activity.DaggerSplashActivityComponent;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.module.AppModule;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.module.activity.SplashActivityModule;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.User;
 import com.goforer.github_clean_architecture_mvp.presentation.presenter.SplashPresenter;
+
+import javax.inject.Inject;
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
@@ -20,7 +26,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     private static final int MIN_SPLASH_TIME = 4400;
     public static final String USER_NAME = "jakewharton";
 
-    private SplashContract.Presenter mPresenter;
+    @Inject
+    SplashPresenter mPresenter;
 
     private long mSplashStart;
 
@@ -35,9 +42,14 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         }
 
         mSplashStart = System.currentTimeMillis();
-
-        mPresenter = new SplashPresenter(this);
         mPresenter.getUser(USER_NAME);
+    }
+
+    @Override
+    protected void setupActivityComponent() {
+        DaggerSplashActivityComponent.builder()
+                .appModule(new AppModule((Github_Clean_Architecture) getApplication()))
+                .splashActivityModule(new SplashActivityModule(this)).build().inject(this);
     }
 
     @Override
@@ -62,7 +74,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void setPresenter(@NonNull SplashContract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
+        mPresenter = (SplashPresenter) checkNotNull(presenter);
     }
 
     @Override
@@ -71,7 +83,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
+    public void showError(Context context, String errorMessage) {
         CommonUtils.showToastMessage(this, errorMessage, Toast.LENGTH_SHORT);
         new Handler().postDelayed(new Runnable() {
             @Override

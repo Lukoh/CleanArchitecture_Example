@@ -1,5 +1,7 @@
 package com.goforer.github_clean_architecture_mvp.repository.request;
 
+import android.content.Context;
+
 import com.goforer.github_clean_architecture_mvp.domain.repository.RepositoryReq;
 import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryAdapterContract.View;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.Repository;
@@ -14,10 +16,11 @@ import retrofit2.Response;
 
 public class RepositoryReqImpl implements RepositoryReq {
     @Override
-    public void getRepositoryList(View view, String userName, ResponseRepositoryEvent event) {
+    public void getRepositoryList(final Context context, View view, String userName,
+                                  final boolean enabledSort, ResponseRepositoryEvent event) {
         Call<List<Repository>> call
                 = RequestClient.INSTANCE.getRequestMethod().getRepository(userName);
-        call.enqueue(new RequestRepositoryCallback(event, view) {
+        call.enqueue(new RequestRepositoryCallback(context, event, view, enabledSort) {
             @Override
             public void onResponse(Call<List<Repository>> call,
                                    Response<List<Repository>> response) {

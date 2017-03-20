@@ -1,5 +1,7 @@
 package com.goforer.github_clean_architecture_mvp.repository.communicator.callback;
 
+import android.content.Context;
+
 import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryAdapterContract.View;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.Repository;
 import com.goforer.github_clean_architecture_mvp.presentation.model.event.ResponseRepositoryEvent;
@@ -19,11 +21,18 @@ import retrofit2.Callback;
 public class RequestRepositoryCallback implements Callback<List<Repository>> {
     private ResponseRepositoryEvent mEvent;
 
+    private Context mContext;
+
     private View mView;
 
-    protected RequestRepositoryCallback(ResponseRepositoryEvent event, View view) {
+    private boolean mEnabledSort;
+
+    protected RequestRepositoryCallback(final Context context, final ResponseRepositoryEvent event,
+                                        final View view, final boolean enabledSort) {
+        mContext = context;
         mEvent = event;
         mView = view;
+        mEnabledSort = enabledSort;
     }
 
     @Override
@@ -31,9 +40,11 @@ public class RequestRepositoryCallback implements Callback<List<Repository>> {
                            retrofit2.Response<List<Repository>> response) {
         if (mEvent != null) {
             mEvent.setResponseClient(response.body());
+            mEvent.setContext(mContext);
             mEvent.setMessage(RequestClient.SUCCESS);
             mEvent.parseInResponse();
             mEvent.setView(mView);
+            mEvent.setEnableSort(mEnabledSort);
             EventBus.getDefault().post(mEvent);
         }
     }
@@ -43,6 +54,7 @@ public class RequestRepositoryCallback implements Callback<List<Repository>> {
         if (mEvent != null) {
             EventBus.getDefault().post(mEvent);
             mEvent.setResponseClient(null);
+            mEvent.setContext(mContext);
             mEvent.setMessage(t.getMessage());
             mEvent.setView(mView);
         }

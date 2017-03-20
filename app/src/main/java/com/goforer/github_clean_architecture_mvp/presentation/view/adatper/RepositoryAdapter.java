@@ -33,25 +33,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class  RepositoryAdapter extends BaseListAdapter<Repository>
         implements RepositoryAdapterContract.Presenter, RepositoryAdapterContract.View,
                    ItemTouchHelperListener {
     private Context mContext;
 
+    @SuppressWarnings("unused")
     private RepositoryContract.Presenter mPresenter;
 
     private RecyclerFragment mFragment;
 
-    private List<Repository> mItems;
+    private List mItems;
 
-    public RepositoryAdapter(Context context, RecyclerFragment fragment, int layoutResId,
-                             boolean usedLoadingImage) {
-        super(layoutResId);
+    @Inject
+    public RepositoryAdapter(Context context, RecyclerFragment fragment) {
+        super(R.layout.list_repository_item);
 
-        setUsedLoadingImage(usedLoadingImage);
         mContext = context;
         mFragment = fragment;
-
         mItems = new ArrayList<>();
     }
 
@@ -150,7 +151,8 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
     }
 
     @Override
-    public void addItems(final List<Repository> items, boolean isUpdated) {
+    @SuppressWarnings("unchecked")
+    public void addItems(final List<?> items, boolean isUpdated) {
         if (items != null && !items.isEmpty()) {
             if (isUpdated) {
                 mItems.addAll(0, items);
@@ -174,7 +176,7 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
     }
 
     @Override
-    public void showErrorMessage(String errorMessage) {
+    public void showError(String errorMessage) {
         CommonUtils.showToastMessage(mContext, errorMessage, Toast.LENGTH_SHORT);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -185,7 +187,11 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
 
     }
 
-    private final static class RepositoryViewHolder extends BaseViewHolder<Repository> {
+    public void setEnableLoadingImage(boolean usedLoadingImage) {
+        setUsedLoadingImage(usedLoadingImage);
+    }
+
+    final static class RepositoryViewHolder extends BaseViewHolder<Repository> {
         private View mView;
 
         @SuppressWarnings("unused")

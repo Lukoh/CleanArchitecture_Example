@@ -1,8 +1,10 @@
 package com.goforer.github_clean_architecture_mvp.presentation.presenter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.goforer.github_clean_architecture_mvp.domain.interactor.Sort;
+import com.goforer.github_clean_architecture_mvp.domain.interactor.interactor;
+import com.goforer.github_clean_architecture_mvp.domain.sort.Sort;
 import com.goforer.github_clean_architecture_mvp.domain.sort.comparator.RepositoryComparator;
 import com.goforer.github_clean_architecture_mvp.domain.sort.SortImpl;
 import com.goforer.github_clean_architecture_mvp.domain.repository.RepositoryReq;
@@ -17,18 +19,21 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class RepositoryPresenter implements RepositoryContract.Presenter {
+import java.util.List;
+
+import javax.inject.Inject;
+
+public class RepositoryPresenter implements RepositoryContract.Presenter, interactor {
     private RepositoryAdapterContract.View mAdapterView;
     @SuppressWarnings("unused")
     private RepositoryAdapterContract.Presenter mAdapterPresenter;
 
-    private final View mView;
+    @Inject
+    SortImpl<Repository> mSort;
 
-    private Sort<Repository> mSort;
-
+    @Inject
     public RepositoryPresenter(@NonNull RepositoryContract.View view) {
-        mView = view;
-        mView.setPresenter(this);
+        view.setPresenter(this);
     }
 
     @Override
@@ -47,20 +52,26 @@ public class RepositoryPresenter implements RepositoryContract.Presenter {
     }
 
     @Override
+    public RepositoryAdapterContract.Presenter getRepositoryAdapterPresenter() {
+        return mAdapterPresenter;
+    }
+
+    @Override
     public void setRepositoryAdapterView(RepositoryAdapterContract.View adapterView) {
         mAdapterView = adapterView;
         mAdapterView.setPresenter(this);
     }
 
     @Override
-    public void getRepositoryList(String userName, boolean enabledSort) {
-        if (enabledSort) {
-            mSort = new SortImpl<>();
-        }
+    public RepositoryAdapterContract.View getRepositoryAdapterView() {
+        return mAdapterView;
+    }
 
+    @Override
+    public void getRepositoryList(Context context, String userName, boolean enabledSort) {
         RepositoryReq request = new RepositoryReqImpl();
         RepositoryEvent event = new RepositoryEvent();
-        request.getRepositoryList(mAdapterView, userName, event);
+        request.getRepositoryList(context, mAdapterView, userName, enabledSort, event);
     }
 
     @Override
@@ -68,16 +79,35 @@ public class RepositoryPresenter implements RepositoryContract.Presenter {
 
     }
 
+    @Override
+    public void onSorted(RepositoryAdapterContract.View view, List<?> items) {
+        view.addItems(items, false);
+    }
+
+
+    @SuppressWarnings("unused")
+    public RepositoryAdapterContract.Presenter getAdapterPresenter() {
+        return mAdapterPresenter;
+    }
+
     @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(RepositoryEvent event) {
         if (event.getResponseClient() == null) {
-            event.getView().showErrorMessage(event.getMessage());
+            event.getView().showError(event.getMessage());
 
             return;
         }
 
-        event.getView().addItems(mSort.sort(event.getResponseClient(), new RepositoryComparator()),
-                false);
+        if (!event.enabledSort()) {
+            event.getView().addItems(event.getResponseClient(), false);
+
+            return;
+        }
+
+        if (mSort != null) {
+            mSort.setSort(this, event.getView());
+            mSort.sort(event.getResponseClient(), new RepositoryComparator());
+        }
     }
 }

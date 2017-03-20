@@ -32,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setupActivityComponent();
         EventBus.getDefault().register(this);
         setContentView();
         bindViews();
@@ -144,6 +145,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setViews(Bundle savedInstanceState) {
     }
 
+    protected abstract void setupActivityComponent();
+
     @Override
     public void finish() {
         super.finish();
@@ -156,8 +159,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param containerViewId Identifier of the container whose fragment(s) are to be replaced.
      * @param args Bundle of arguments to supply to the fragment
      */
-    protected Fragment transactFragment(Class<?> cls, @IdRes int containerViewId, Bundle args) {
-        return transactFragment(cls.getName(), containerViewId, args);
+    protected void transactFragment(Class<?> cls, @IdRes int containerViewId, Bundle args) {
+        transactFragment(cls.getName(), containerViewId, args);
     }
 
     /**
@@ -167,7 +170,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param containerViewId Identifier of the container whose fragment(s) are to be replaced.
      * @param args Bundle of arguments to supply to the fragment
      */
-    protected Fragment transactFragment(String tag, @IdRes int containerViewId, Bundle args) {
+    protected void transactFragment(String tag, @IdRes int containerViewId, Bundle args) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
@@ -177,8 +180,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(containerViewId, fragment, tag);
         ft.commit();
-
-        return fragment;
     }
 
     /**

@@ -18,8 +18,13 @@ import com.goforer.base.presentation.view.decoration.RemoverItemDecoration;
 import com.goforer.base.presentation.view.fragment.RecyclerFragment;
 import com.goforer.base.presentation.view.helper.RecyclerItemTouchHelperCallback;
 import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.github_clean_architecture_mvp.presentation.Github_Clean_Architecture;
 import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryContract;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.component.fragment.DaggerRepositoryFragmentComponent;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.module.AppModule;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.module.fragment.RepositoryFragmentModule;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.Repository;
+import com.goforer.github_clean_architecture_mvp.presentation.presenter.RepositoryPresenter;
 import com.goforer.github_clean_architecture_mvp.presentation.view.activity.RepositoryActivity;
 import com.goforer.github_clean_architecture_mvp.presentation.view.activity.SplashActivity;
 import com.goforer.github_clean_architecture_mvp.presentation.view.adatper.RepositoryAdapter;
@@ -28,16 +33,31 @@ import com.goforer.github_clean_architecture_mvp.presentation.view.view.drawer.S
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+import javax.inject.Inject;
+
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 public class RepositoryFragment extends RecyclerFragment<Repository>
         implements RepositoryContract.View {
     private static final String TAG = "RepositoryFragment";
 
-    private RepositoryAdapter mAdapter;
+    @Inject
+    RepositoryAdapter mAdapter;
 
-    private RepositoryContract.Presenter mPresenter;
-    private SlidingDrawer mSlidingDrawer;
+    @Inject
+    SlidingDrawer mSlidingDrawer;
+
+    @Inject
+    RepositoryPresenter mPresenter;
+
+    @Inject
+    RecyclerItemTouchHelperCallback mItemTouchHelperCallback;
+
+    @Inject
+    RemoverItemDecoration mRemoverItemDecoration;
+
+    @Inject
+    LinearLayoutManager mLinearLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -51,8 +71,8 @@ public class RepositoryFragment extends RecyclerFragment<Repository>
 
         setItemHasFixedSize(true);
         refresh(true);
-        mSlidingDrawer = new SlidingDrawer(getBaseActivity(), SlidingDrawer.DRAWER_PROFILE_TYPE,
-                R.id.drawer_container, savedInstanceState);
+        mSlidingDrawer.setRootViewRes(R.id.drawer_container);
+        mSlidingDrawer.setType(SlidingDrawer.DRAWER_PROFILE_TYPE);
         mSlidingDrawer.setDrawerInfo(((RepositoryActivity)getActivity()).getUserProfile());
     }
 
@@ -74,7 +94,7 @@ public class RepositoryFragment extends RecyclerFragment<Repository>
 
     @Override
     public void setPresenter(@NonNull RepositoryContract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
+        mPresenter = (RepositoryPresenter) checkNotNull(presenter);
     }
 
     @Override
@@ -112,17 +132,17 @@ public class RepositoryFragment extends RecyclerFragment<Repository>
             }
         });
 
-        return new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+        return mLinearLayoutManager;
     }
 
     @Override
     protected RecyclerView.ItemDecoration createItemDecoration() {
-        return new RemoverItemDecoration(Color.RED);
+        return mRemoverItemDecoration;
     }
 
     @Override
     protected RecyclerView.Adapter createAdapter() {
-        mAdapter = new RepositoryAdapter(mContext, this, R.layout.list_repository_item, true);
+        mAdapter.setEnableLoadingImage(true);
         getRecyclerView().setAdapter(mAdapter);
 
         return mAdapter;
@@ -130,7 +150,7 @@ public class RepositoryFragment extends RecyclerFragment<Repository>
 
     @Override
     protected ItemTouchHelper.Callback createItemTouchHelper() {
-        return new RecyclerItemTouchHelperCallback(mContext, mAdapter, Color.RED);
+        return mItemTouchHelperCallback;
     }
 
     @Override
@@ -150,8 +170,16 @@ public class RepositoryFragment extends RecyclerFragment<Repository>
     }
 
     @Override
+    protected void setupFragmentComponent() {
+        DaggerRepositoryFragmentComponent.builder()
+                .appModule(new AppModule((Github_Clean_Architecture) getActivity().getApplication()))
+                .repositoryFragmentModule(new RepositoryFragmentModule(getContext(), this))
+                .build().inject(this);
+    }
+
+    @Override
     protected void updateData() {
-        /**
+        /*
          * Please put some module to update new data here, instead of doneRefreshing() method if
          * there is some data to be updated in Server side.
          * I just put doneRefreshing() method because there is no data to be updated from Sever side.
@@ -171,7 +199,11 @@ public class RepositoryFragment extends RecyclerFragment<Repository>
         if (!isNew) {
             mPresenter.setRepositoryAdapterView(mAdapter);
             mPresenter.setRepositoryAdapterPresenter(mAdapter);
-            mPresenter.getRepositoryList(SplashActivity.USER_NAME, true);
+            mPresenter.getRepositoryList(getContext(), SplashActivity.USER_NAME, true);
         }
+    }
+
+    public RepositoryContract.Presenter getPresenter() {
+        return mPresenter;
     }
 }

@@ -21,6 +21,8 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import javax.inject.Inject;
+
 public class SlidingDrawer {
     public static final int DRAWER_PROFILE_TYPE = 0;
 
@@ -47,13 +49,19 @@ public class SlidingDrawer {
     private int mType;
     private int mRootViewRes;
 
-    public SlidingDrawer(final Context context, final int type, int rootViewRes,
-                         @Nullable Bundle savedInstanceState) {
+    @Inject
+    public SlidingDrawer(final Context context, final Bundle bundle) {
         mContext = context;
         mActivity = (BaseActivity) context;
-        mType = type;
+        mBundle = bundle;
+    }
+
+    public void setRootViewRes(final int rootViewRes) {
         mRootViewRes = rootViewRes;
-        mBundle = savedInstanceState;
+    }
+
+    public void setType(final int type) {
+        mType = type;
     }
 
     public Drawer getDrawer() {

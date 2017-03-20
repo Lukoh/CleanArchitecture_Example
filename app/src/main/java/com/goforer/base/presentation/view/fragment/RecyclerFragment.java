@@ -59,18 +59,22 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setupFragmentComponent();
         setViews();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         setScrollListener();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
         removeScrollListener();
     }
 
@@ -463,6 +467,8 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
      * @return true if the ItemDecoration in {@link RecyclerView} must be visible
      */
     protected abstract boolean isItemDecorationVisible();
+
+    protected abstract void setupFragmentComponent();
 
     /**
      * The information should be refreshed whenever the RecyclerFragment is created or

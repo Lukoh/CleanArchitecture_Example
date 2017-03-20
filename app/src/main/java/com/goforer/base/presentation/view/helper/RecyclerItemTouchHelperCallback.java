@@ -14,6 +14,8 @@ import android.view.View;
 import com.goforer.base.presentation.view.holder.ItemHolderBinder;
 import com.goforer.github_clean_architecture_mvp.R;
 
+import javax.inject.Inject;
+
 public class RecyclerItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     public static final float ALPHA_FULL = 1.0f;
@@ -30,12 +32,13 @@ public class RecyclerItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private boolean mInitiated;
 
+    @SuppressWarnings("unused")
     public RecyclerItemTouchHelperCallback(Context context, ItemTouchHelperListener listener) {
         this(context, listener, Color.BLUE);
     }
 
-    public RecyclerItemTouchHelperCallback(Context context, ItemTouchHelperListener listener,
-                                           int bgColor) {
+    @Inject
+    public RecyclerItemTouchHelperCallback(Context context, ItemTouchHelperListener listener, int bgColor) {
         mContext = context;
         mHelperListener = listener;
         mBgColor = bgColor;

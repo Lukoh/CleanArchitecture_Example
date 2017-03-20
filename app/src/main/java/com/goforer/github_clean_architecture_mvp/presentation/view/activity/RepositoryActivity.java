@@ -1,7 +1,7 @@
 package com.goforer.github_clean_architecture_mvp.presentation.view.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,22 +10,31 @@ import android.widget.TextView;
 
 import com.goforer.base.presentation.view.activity.BaseActivity;
 import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.github_clean_architecture_mvp.presentation.Github_Clean_Architecture;
 import com.goforer.github_clean_architecture_mvp.presentation.caller.Caller;
+import com.goforer.github_clean_architecture_mvp.presentation.contract.RepositoryContract;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.component.activity.DaggerRepositoryActivityComponent;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.module.AppModule;
+import com.goforer.github_clean_architecture_mvp.presentation.dagger.module.activity.RepositoryActivityModule;
 import com.goforer.github_clean_architecture_mvp.presentation.model.data.User;
 import com.goforer.github_clean_architecture_mvp.presentation.presenter.RepositoryPresenter;
 import com.goforer.github_clean_architecture_mvp.presentation.view.fragment.RepositoryFragment;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
-public class RepositoryActivity extends BaseActivity {
-    private Fragment mFragment;
+import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
+
+public class RepositoryActivity extends BaseActivity implements RepositoryContract.View {
     /**
      * Notice
      *
      * In case of being presenter object used in Activity, the presenter object have to be declared here.
      * But if not, it have to be declared as local variable not class member variable.
      */
-    private RepositoryPresenter mPresenter;
+    @Inject
+    RepositoryPresenter mPresenter;
 
     private User mUserProfile;
 
@@ -52,9 +61,6 @@ public class RepositoryActivity extends BaseActivity {
             return;
         }
 
-        // Create the presenter
-        mPresenter
-                = new RepositoryPresenter((RepositoryFragment)mFragment);
         mPresenter.start();
     }
 
@@ -86,8 +92,15 @@ public class RepositoryActivity extends BaseActivity {
     }
 
     @Override
+    protected void setupActivityComponent() {
+        DaggerRepositoryActivityComponent.builder().appModule(
+                new AppModule((Github_Clean_Architecture) getApplication())).repositoryActivityModule(
+                new RepositoryActivityModule(getApplicationContext(), this)).build().inject(this);
+    }
+
+    @Override
     protected void setViews(Bundle savedInstanceState) {
-        mFragment = transactFragment(RepositoryFragment.class, R.id.content_holder, null);
+        transactFragment(RepositoryFragment.class, R.id.content_holder, null);
     }
 
     @Override
@@ -108,6 +121,12 @@ public class RepositoryActivity extends BaseActivity {
     protected void setContentView() {
         setContentView(R.layout.activity_base);
     }
+
+    @Override
+    public void setPresenter(@NonNull RepositoryContract.Presenter presenter) {
+        mPresenter = (RepositoryPresenter) checkNotNull(presenter);
+    }
+
 
     @Override
     public void onBackPressed() {

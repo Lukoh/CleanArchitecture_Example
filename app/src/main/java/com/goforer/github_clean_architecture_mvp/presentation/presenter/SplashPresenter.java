@@ -12,9 +12,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import javax.inject.Inject;
+
 public class SplashPresenter implements SplashContract.Presenter {
     private final View mView;
 
+    @Inject
     public SplashPresenter(@NonNull View view) {
         mView = view;
         mView.setPresenter(this);
@@ -41,7 +44,7 @@ public class SplashPresenter implements SplashContract.Presenter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserProfileEvent event) {
         if (event.getResponseClient() == null) {
-            event.getView().showErrorMessage(event.getMessage());
+            event.getView().showError(null, event.getMessage());
 
             return;
         }
