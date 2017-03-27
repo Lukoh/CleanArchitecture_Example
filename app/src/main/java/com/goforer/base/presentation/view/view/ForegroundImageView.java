@@ -6,11 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
-import android.widget.ImageView;
+import android.support.v7.widget.AppCompatImageView;
 
-import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.clean_architecture.R;
 
-public class ForegroundImageView extends ImageView {
+public class ForegroundImageView extends AppCompatImageView {
 
     private Drawable foreground;
 

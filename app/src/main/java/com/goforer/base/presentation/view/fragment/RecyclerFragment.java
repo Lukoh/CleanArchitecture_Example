@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 
 import com.goforer.base.presentation.view.adatper.BaseListAdapter;
 import com.goforer.base.presentation.view.decoration.DividerItemDecoration;
-import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.clean_architecture.R;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
@@ -130,6 +130,7 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
             }
 
             mCurrentPage = 1;
+            mTotalPage = 1;
             if (isRefreshed) {
                 requestData(false);
             } else {

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.goforer.github_clean_architecture_mvp">
+    package="com.goforer.clean_architecture">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.goforer.github_clean_architecture_mvp.presentation.Github_Clean_Architecture"
+        android:name="com.goforer.clean_architecture.presentation.CleanArchitectureApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_github"
         android:label="@string/app_name"
@@ -19,7 +19,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.goforer.github_clean_architecture_mvp.presentation.view.activity.SplashActivity"
+            android:name="com.goforer.clean_architecture.presentation.view.activity.SplashActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:protectionLevel="signature"
@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name="com.goforer.github_clean_architecture_mvp.presentation.view.activity.RepositoryActivity"
+            android:name="com.goforer.clean_architecture.presentation.view.activity.RepositoryActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:protectionLevel="signature"

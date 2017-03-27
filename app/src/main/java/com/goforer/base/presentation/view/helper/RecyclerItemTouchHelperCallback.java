@@ -12,7 +12,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.goforer.base.presentation.view.holder.ItemHolderBinder;
-import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.clean_architecture.R;
 
 import javax.inject.Inject;
 

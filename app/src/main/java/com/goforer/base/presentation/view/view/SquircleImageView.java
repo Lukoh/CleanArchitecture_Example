@@ -14,10 +14,11 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.DrawableRes;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.clean_architecture.R;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -26,7 +27,7 @@ import com.bumptech.glide.signature.StringSignature;
 
 import java.util.UUID;
 
-public class SquircleImageView extends ImageView {
+public class SquircleImageView extends AppCompatImageView {
     private static final int TILE_MODE_UNDEFINED = -2;
     private static final int TILE_MODE_CLAMP = 0;
     private static final int TILE_MODE_REPEAT = 1;

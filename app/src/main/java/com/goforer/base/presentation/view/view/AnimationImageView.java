@@ -3,11 +3,11 @@ package com.goforer.base.presentation.view.view;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.support.v7.widget.AppCompatImageView;
 
-import com.goforer.github_clean_architecture_mvp.R;
+import com.goforer.clean_architecture.R;
 
-public class AnimationImageView extends ImageView {
+public class AnimationImageView extends AppCompatImageView {
 
     AnimationDrawable mDrawable;
 
