@@ -1,176 +1,62 @@
 package com.goforer.clean_architecture.presentation.model.data;
 
-import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.goforer.base.presentation.model.BaseModel;
-import com.google.gson.annotations.SerializedName;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
-public class Repository extends BaseModel implements Parcelable {
-    @SerializedName("id")
-    private long mId;
-    @SerializedName("name")
-    private String mName;
-    @SerializedName("owner")
-    private Owner mOwner;
-    @SerializedName("description")
-    private String mDescription;
-    @SerializedName("url")
-    private String mUrl;
-    @SerializedName("homepage")
-    private String mHomepage;
-    @SerializedName("stargazers_count")
-    private int mStarCount;
+@AutoValue
+public abstract class Repository extends BaseModel implements Parcelable {
+    public abstract long id();
 
-    public Repository() {
+    @Nullable
+    public abstract String name();
+    @Nullable
+    public abstract Owner owner();
+    @Nullable
+    public abstract String description();
+    @Nullable
+    public abstract String url();
+    @Nullable
+    public abstract String homepage();
+
+    public abstract int stargazers_count();
+
+    public static Repository create(long id, @Nullable String name, @Nullable Owner owner,
+                                    @Nullable String description, @Nullable String url,
+                                    @Nullable String homepage, int stargazers_count) {
+        return builder()
+                .id(id)
+                .name(name)
+                .owner(owner)
+                .description(description)
+                .url(url)
+                .homepage(homepage)
+                .stargazers_count(stargazers_count)
+                .build();
     }
 
-    public long getId() {
-        return mId;
+    @SuppressWarnings("WeakerAccess")
+    public static TypeAdapter<Repository> typeAdapter(Gson gson) {
+        return new AutoValue_Repository.GsonTypeAdapter(gson);
     }
 
-    public void setId(long id) {
-        mId = id;
+    public static Builder builder() {
+        return new AutoValue_Repository.Builder();
     }
 
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
-    public Owner get0wner() {
-        return mOwner;
-    }
-
-    public void setOwner(Owner owner) {
-        mOwner = owner;
-    }
-
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
-    }
-
-    public String getUrl() {
-        return mUrl;
-    }
-
-    public void setUrl(String url) {
-        mUrl = url;
-    }
-
-    public String getHomepage() {
-        return mHomepage;
-    }
-
-    public void setHomepage(String homepage) {
-        mHomepage = homepage;
-    }
-
-    public int getStarCount() {
-        return mStarCount;
-    }
-
-    public void setStarCount(int starCount) {
-        mStarCount = starCount;
-    }
-
-    protected Repository(Parcel in) {
-        mId = in.readLong();
-        mName = in.readString();
-        mOwner = in.readParcelable(Owner.class.getClassLoader());
-        mDescription = in.readString();
-        mUrl = in.readString();
-        mHomepage = in.readString();
-        mStarCount = in.readInt();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mId);
-        dest.writeString(mName);
-        dest.writeParcelable(mOwner, flags);
-        dest.writeString(mDescription);
-        dest.writeString(mUrl);
-        dest.writeString(mHomepage);
-        dest.writeInt(mStarCount);
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Repository> CREATOR
-            = new Parcelable.Creator<Repository>() {
-        @Override
-        public Repository createFromParcel(Parcel in) {
-            return new Repository(in);
-        }
-
-        @Override
-        public Repository[] newArray(int size) {
-            return new Repository[size];
-        }
-    };
-
-    public final static class Owner implements Parcelable {
-        @SerializedName("id")
-        private long mId;
-        @SerializedName("avatar_url")
-        private String mAvartarUrl;
-        @SerializedName("repos_url")
-        private String mReposUrl;
-
-        public long getId() {
-            return mId;
-        }
-
-        public String getAvartarUrl() {
-            return mAvartarUrl;
-        }
-
-        public String getReposUrl() {
-            return mReposUrl;
-        }
-
-        protected Owner(Parcel in) {
-            mId = in.readLong();
-            mAvartarUrl = in.readString();
-            mReposUrl = in.readString();
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeLong(mId);
-            dest.writeString(mAvartarUrl);
-            dest.writeString(mReposUrl);
-        }
-
-        @SuppressWarnings("unused")
-        public static final Parcelable.Creator<Owner> CREATOR
-                = new Parcelable.Creator<Owner>() {
-            @Override
-            public Owner createFromParcel(Parcel in) {
-                return new Owner(in);
-            }
-
-            @Override
-            public Owner[] newArray(int size) {
-                return new Owner[size];
-            }
-        };
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder id(long id);
+        public abstract Builder name(@Nullable String name);
+        public abstract Builder owner(@Nullable Owner owner);
+        public abstract Builder description(@Nullable String description);
+        public abstract Builder url(@Nullable String url);
+        public abstract Builder homepage(@Nullable String homepage);
+        public abstract Builder stargazers_count(int count);
+        public abstract Repository build();
     }
 }

@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 
 import com.mikepenz.materialdrawer.holder.ColorHolder;
 
+@SuppressWarnings("unused")
 public class SecondaryIconDrawerItem extends PrimaryIconDrawerItem {
 
     @Override

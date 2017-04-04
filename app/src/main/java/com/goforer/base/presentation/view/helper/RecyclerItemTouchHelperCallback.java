@@ -17,8 +17,7 @@ import com.goforer.clean_architecture.R;
 import javax.inject.Inject;
 
 public class RecyclerItemTouchHelperCallback extends ItemTouchHelper.Callback {
-
-    public static final float ALPHA_FULL = 1.0f;
+    private static final float ALPHA_FULL = 1.0f;
 
     private Context mContext;
 

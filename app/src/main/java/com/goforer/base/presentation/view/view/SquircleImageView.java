@@ -16,7 +16,6 @@ import android.os.Looper;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.goforer.clean_architecture.R;
 import com.bumptech.glide.DrawableRequestBuilder;
@@ -195,6 +194,7 @@ public class SquircleImageView extends AppCompatImageView {
         mDefaultImage = defaultImage;
     }
 
+    @SuppressWarnings("unused")
     public void loadImage(final String url) {
         DrawableRequestBuilder builder = Glide.with(getContext())
                 .load(url)
@@ -239,6 +239,7 @@ public class SquircleImageView extends AppCompatImageView {
      *
      * @param imageUrl the desired Image URL
      */
+    @SuppressWarnings("unused")
     public void setImageNewCache(String imageUrl) {
         if (imageUrl != null) {
             Glide.with(getContext()).load(imageUrl).asBitmap().signature(
@@ -260,6 +261,7 @@ public class SquircleImageView extends AppCompatImageView {
      *
      * @param url the Url of an image
      */
+    @SuppressWarnings("unused")
     public void setImageUrl(String url) {
         if (url.length() > 0) {
             Glide.with(getContext()).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
@@ -279,6 +281,7 @@ public class SquircleImageView extends AppCompatImageView {
      * @param resizeHeight the height to resize
      * @param defaultImage the default image
      */
+    @SuppressWarnings("unused")
     public void setImage(String imageUrl, int resizeWidth, int resizeHeight, Drawable defaultImage) {
         setDefaultImage(defaultImage);
         setImage(imageUrl, resizeWidth, resizeHeight);
@@ -325,6 +328,7 @@ public class SquircleImageView extends AppCompatImageView {
      * @param imageUrl the desired Image URL
      * @param resId the resource identifier of the drawable
      */
+    @SuppressWarnings("unused")
     public void setImage(final String imageUrl, @DrawableRes int resId) {
         setImageResource(resId);
 
@@ -474,10 +478,12 @@ public class SquircleImageView extends AppCompatImageView {
         super.setBackgroundDrawable(mBackgroundDrawable);
     }
 
+    @SuppressWarnings("unused")
     public float getCornerRadius() {
         return mCornerRadius;
     }
 
+    @SuppressWarnings("unused")
     public void setCornerRadiusDimension(int resId) {
         setCornerRadius(getResources().getDimension(resId));
     }
@@ -493,10 +499,12 @@ public class SquircleImageView extends AppCompatImageView {
         invalidate();
     }
 
+    @SuppressWarnings("unused")
     public float getBorderWidth() {
         return mBorderWidth;
     }
 
+    @SuppressWarnings("unused")
     public void setBorderWidth(int resId) {
         setBorderWidth(getResources().getDimension(resId));
     }
@@ -517,6 +525,7 @@ public class SquircleImageView extends AppCompatImageView {
      *
      * @return the the SquircleImageView's basic border color
      */
+    @SuppressWarnings("unused")
     public int getBorderColor() {
         return mBorderColor.getDefaultColor();
     }
@@ -526,6 +535,7 @@ public class SquircleImageView extends AppCompatImageView {
      *
      * @param color The new color (including alpha) to set the border.
      */
+    @SuppressWarnings("unused")
     public void setBorderColor(int color) {
         setBorderColor(ColorStateList.valueOf(color));
     }
@@ -536,6 +546,7 @@ public class SquircleImageView extends AppCompatImageView {
      * @return a set of state spec / color pairs
      * @see ColorStateList
      */
+    @SuppressWarnings("unused")
     public ColorStateList getBorderColors() {
         return mBorderColor;
     }
@@ -559,10 +570,12 @@ public class SquircleImageView extends AppCompatImageView {
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean isOval() {
         return mIsOval;
     }
 
+    @SuppressWarnings("unused")
     public void setOval(boolean oval) {
         mIsOval = oval;
         updateDrawableAttrs();
@@ -576,6 +589,7 @@ public class SquircleImageView extends AppCompatImageView {
      * @return the shader mode
      * @see Shader.TileMode
      */
+    @SuppressWarnings("unused")
     public Shader.TileMode getTileModeX() {
         return mTileModeX;
     }
@@ -603,6 +617,7 @@ public class SquircleImageView extends AppCompatImageView {
      * @return the shader mode
      * @see Shader.TileMode
      */
+    @SuppressWarnings("unused")
     public Shader.TileMode getTileModeY() {
         return mTileModeY;
     }

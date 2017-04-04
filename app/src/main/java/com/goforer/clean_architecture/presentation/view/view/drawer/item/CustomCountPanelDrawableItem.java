@@ -29,25 +29,28 @@ public class CustomCountPanelDrawableItem extends CountPanelDrawerItem<CustomCou
 
     private Drawer.OnDrawerItemClickListener mOnDrawerItemClickListener;
 
-    protected boolean arrowVisible = true;
+    private boolean arrowVisible = true;
 
-    protected ColorHolder arrowColor;
+    private ColorHolder arrowColor;
 
     public CustomCountPanelDrawableItem withArrowVisible(boolean visible) {
         this.arrowVisible = visible;
         return this;
     }
 
+    @SuppressWarnings("unused")
     public CustomCountPanelDrawableItem withArrowColor(@ColorInt int arrowColor) {
         this.arrowColor = ColorHolder.fromColor(arrowColor);
         return this;
     }
 
+    @SuppressWarnings("unused")
     public CustomCountPanelDrawableItem withArrowColorRes(@ColorRes int arrowColorRes) {
         this.arrowColor = ColorHolder.fromColorRes(arrowColorRes);
         return this;
     }
 
+    @SuppressWarnings("unused")
     public boolean getArrowVisible() {
         return arrowVisible;
     }
@@ -84,8 +87,8 @@ public class CustomCountPanelDrawableItem extends CountPanelDrawerItem<CustomCou
                 @Override
                 public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                     if (drawerItem instanceof AbstractDrawerItem && drawerItem.isEnabled()) {
-                        if (((AbstractDrawerItem) drawerItem).getSubItems() != null) {
-                            if (((AbstractDrawerItem) drawerItem).isExpanded()) {
+                        if (drawerItem.getSubItems() != null) {
+                            if (drawerItem.isExpanded()) {
                                 ViewCompat.animate(view.findViewById(
                                         com.mikepenz.materialdrawer.R.id.material_drawer_arrow))
                                         .rotation(180).start();
@@ -140,14 +143,14 @@ public class CustomCountPanelDrawableItem extends CountPanelDrawerItem<CustomCou
         return new ItemFactory();
     }
 
-    public static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }
     }
 
     public static class ViewHolder extends CountPanelViewHolder {
-        public IconicsImageView arrow;
+        IconicsImageView arrow;
 
         public ViewHolder(View view) {
             super(view);

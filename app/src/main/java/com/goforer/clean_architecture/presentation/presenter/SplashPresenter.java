@@ -18,6 +18,7 @@ public class SplashPresenter implements SplashContract.Presenter {
     private final View mView;
 
     @Inject
+    @SuppressWarnings("WeakerAccess")
     public SplashPresenter(@NonNull View view) {
         mView = view;
         mView.setPresenter(this);

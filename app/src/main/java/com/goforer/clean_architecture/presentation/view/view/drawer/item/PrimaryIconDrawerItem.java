@@ -14,9 +14,10 @@ import com.mikepenz.materialdrawer.model.interfaces.ColorfulBadgeable;
 
 import java.util.List;
 
-public class PrimaryIconDrawerItem extends BasePrimaryIconDrawerItem<PrimaryIconDrawerItem, PrimaryIconDrawerItem.ViewHolder> implements ColorfulBadgeable<PrimaryIconDrawerItem> {
-    protected StringHolder mBadge;
-    protected BadgeStyle mBadgeStyle = new BadgeStyle();
+class PrimaryIconDrawerItem extends BasePrimaryIconDrawerItem<PrimaryIconDrawerItem,
+        PrimaryIconDrawerItem.ViewHolder> implements ColorfulBadgeable<PrimaryIconDrawerItem> {
+    private StringHolder mBadge;
+    private BadgeStyle mBadgeStyle = new BadgeStyle();
 
     @Override
     public PrimaryIconDrawerItem withBadge(StringHolder badge) {
@@ -95,7 +96,7 @@ public class PrimaryIconDrawerItem extends BasePrimaryIconDrawerItem<PrimaryIcon
         return new ItemFactory();
     }
 
-    public static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }

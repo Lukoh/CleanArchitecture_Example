@@ -18,20 +18,23 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final long ANIMATION_DURATION = 250;
     private static final float ANIMATION_DEGREE = 1.0f;
 
-    public static final int VIEW_TYPE_HEADER = 10000;
-    public static final int VIEW_TYPE_FOOTER = 10001;
-    public static final int VIEW_TYPE_LOADING = 10002;
-    public static final int VIEW_TYPE_ITEM = 10003;
-    public static final int VIEW_TYPE_NONE_COMMENT = 10004;
+    @SuppressWarnings("unused")
+    protected static final int VIEW_TYPE_HEADER = 10000;
+    protected static final int VIEW_TYPE_FOOTER = 10001;
+    protected static final int VIEW_TYPE_LOADING = 10002;
+    protected static final int VIEW_TYPE_ITEM = 10003;
+    @SuppressWarnings("unused")
+    protected static final int VIEW_TYPE_NONE_COMMENT = 10004;
 
-    protected int mLayoutResId;
+    private int mLayoutResId;
     private int mLastAnimatedPosition = -1;
 
+    @SuppressWarnings("unused")
     public BaseAdapter() {
         super();
     }
 
-    public BaseAdapter(int layoutResId) {
+    BaseAdapter(int layoutResId) {
         super();
         this.mLayoutResId = layoutResId;
     }
@@ -51,7 +54,8 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
      * layout file.
      * <p>
      *
-     * @param viewGroup
+     * @param viewGroup The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
      * @param view The view this LayoutManager is bound to
      * @param type The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type
@@ -59,6 +63,7 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     protected abstract BaseViewHolder createViewHolder(ViewGroup viewGroup,
                                                        View view, int type);
 
+    @SuppressWarnings("unused")
     public void resetAnimation(){
         mLastAnimatedPosition = -1;
     }
@@ -68,6 +73,7 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder> {
      *
      * @param viewHolder the ViewHolder to set animation ViewHolder's item
      */
+    @SuppressWarnings("unused")
     public void setAnimateViewIfNecessary(final RecyclerView.ViewHolder viewHolder) {
         final int position = viewHolder.getAdapterPosition ();
 

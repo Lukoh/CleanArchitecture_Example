@@ -1,5 +1,6 @@
 package com.goforer.clean_architecture.presentation.exception;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -115,12 +116,15 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private String toTimeString(long datetime) {
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HHmmss");
         Date date = new Date(datetime);
         return format.format(date);
     }
 
+    @SuppressWarnings("unused")
     public static String toTimeStringNomore(long datetime) {
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(datetime);
         return format.format(date);

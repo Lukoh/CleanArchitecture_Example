@@ -10,12 +10,13 @@ import android.view.View;
  * to specific item views from the adapter's data set. This can be useful for drawing dividers
  * between items, highlights, visual grouping boundaries and more.
  */
+@SuppressWarnings("unused")
 public class GapItemDecoration extends RecyclerView.ItemDecoration {
-    protected int mGap;
-    protected int mOrientation;
+    private int mGap;
+    private int mOrientation;
 
-    public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
-    public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
+    private static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
+    private static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
     public GapItemDecoration(int orientation, int gap) {
         this.mGap = gap;

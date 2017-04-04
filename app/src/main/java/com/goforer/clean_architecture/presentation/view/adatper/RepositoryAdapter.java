@@ -21,7 +21,7 @@ import com.goforer.base.presentation.view.holder.BaseViewHolder;
 import com.goforer.base.presentation.view.holder.DefaultViewHolder;
 import com.goforer.base.presentation.view.view.SquircleImageView;
 import com.goforer.clean_architecture.R;
-import com.goforer.clean_architecture.presentation.CleanArchitectureApplication;
+import com.goforer.clean_architecture.CleanArchitectureApplication;
 import com.goforer.clean_architecture.presentation.caller.Caller;
 import com.goforer.clean_architecture.presentation.contract.RepositoryAdapterContract;
 import com.goforer.clean_architecture.presentation.contract.RepositoryContract;
@@ -191,6 +191,7 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
         setUsedLoadingImage(usedLoadingImage);
     }
 
+    @SuppressWarnings("WeakerAccess")
     final static class RepositoryViewHolder extends BaseViewHolder<Repository> {
         private View mView;
 
@@ -204,6 +205,7 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
             mIsResumed = isResumed;
         }
 
+        @SuppressWarnings("ConstantConditions")
         @SuppressLint("SetTextI18n")
         @Override
         public void bindItemHolder(final BaseViewHolder holder, @NonNull final Repository repository,
@@ -211,27 +213,27 @@ public class  RepositoryAdapter extends BaseListAdapter<Repository>
             holder.getView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (repository.getHomepage() == null || "".equals(repository.getHomepage())) {
+                    if (repository.homepage() == null || "".equals(repository.homepage())) {
                         CommonUtils.showToastMessage(getContext(),
                                 getContext().getString(R.string.no_homepage), Toast.LENGTH_SHORT);
                         return;
                     }
 
                     if (mIsResumed) {
-                        Caller.INSTANCE.callChromeCustomTabs(getContext(), repository.getHomepage());
+                        Caller.INSTANCE.callChromeCustomTabs(getContext(), repository.homepage());
                     }
                 }
             });
 
             ((TextView)holder.getView().findViewById(R.id.tv_name))
-                    .setText(repository.getName());
+                    .setText(repository.name());
             ((TextView)holder.getView().findViewById(R.id.tv_description))
-                    .setText(repository.getDescription());
+                    .setText(repository.description());
             ((TextView)holder.getView().findViewById(R.id.tv_count))
                     .setText(holder.getContext().getString(R.string.star_count)
-                            +  "  " + String.valueOf(repository.getStarCount()));
+                            +  "  " + String.valueOf(repository.stargazers_count()));
             ((SquircleImageView)holder.getView().findViewById(R.id.iv_avatar))
-                    .setImage(repository.get0wner().getAvartarUrl());
+                    .setImage(repository.owner().avatar_url());
         }
 
         @Override

@@ -36,7 +36,7 @@ public class ReqUserCallback implements Callback<User> {
     @Override
     public void onFailure(Call<User> call, Throwable t) {
         if (mEvent != null) {
-            mEvent.setResponseClient(new User());
+            mEvent.setResponseClient(User.builder().build());
             EventBus.getDefault().post(mEvent);
         }
     }

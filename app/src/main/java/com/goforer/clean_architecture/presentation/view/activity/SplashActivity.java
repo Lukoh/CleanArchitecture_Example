@@ -9,12 +9,12 @@ import android.widget.Toast;
 import com.goforer.base.presentation.utils.CommonUtils;
 import com.goforer.base.presentation.view.activity.BaseActivity;
 import com.goforer.clean_architecture.R;
-import com.goforer.clean_architecture.presentation.CleanArchitectureApplication;
+import com.goforer.clean_architecture.CleanArchitectureApplication;
 import com.goforer.clean_architecture.presentation.caller.Caller;
 import com.goforer.clean_architecture.presentation.contract.SplashContract;
-import com.goforer.clean_architecture.dagger.component.activity.DaggerSplashActivityComponent;
-import com.goforer.clean_architecture.dagger.module.AppModule;
-import com.goforer.clean_architecture.dagger.module.activity.SplashActivityModule;
+import com.goforer.clean_architecture.dependencyinjection.component.activity.DaggerSplashActivityComponent;
+import com.goforer.clean_architecture.dependencyinjection.module.AppModule;
+import com.goforer.clean_architecture.dependencyinjection.module.activity.SplashActivityModule;
 import com.goforer.clean_architecture.presentation.model.data.User;
 import com.goforer.clean_architecture.presentation.presenter.SplashPresenter;
 

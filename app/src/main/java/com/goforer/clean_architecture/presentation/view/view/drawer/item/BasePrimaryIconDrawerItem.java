@@ -17,37 +17,43 @@ import com.mikepenz.materialdrawer.model.BaseViewHolder;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
 
-
-public abstract class BasePrimaryIconDrawerItem <T, VH extends BaseViewHolder>
+@SuppressWarnings("unchecked")
+abstract class BasePrimaryIconDrawerItem <T, VH extends BaseViewHolder>
         extends BaseDrawerItem<T, VH> {
     private StringHolder description;
     private ColorHolder descriptionTextColor;
 
+    @SuppressWarnings("unused")
     public T withIcon(String url) {
         this.icon = new ImageHolder(url);
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withIcon(Uri uri) {
         this.icon = new ImageHolder(uri);
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withDescription(String description) {
         this.description = new StringHolder(description);
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withDescription(@StringRes int descriptionRes) {
         this.description = new StringHolder(descriptionRes);
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withDescriptionTextColor(@ColorInt int color) {
         this.descriptionTextColor = ColorHolder.fromColor(color);
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withDescriptionTextColorRes(@ColorRes int colorRes) {
         this.descriptionTextColor = ColorHolder.fromColorRes(colorRes);
         return (T) this;
@@ -62,16 +68,17 @@ public abstract class BasePrimaryIconDrawerItem <T, VH extends BaseViewHolder>
         return description;
     }
 
-    public ColorHolder getDescriptionTextColor() {
+    private ColorHolder getDescriptionTextColor() {
         return descriptionTextColor;
     }
 
     /**
      * a helper method to have the logic for all secondaryDrawerItems only once
      *
-     * @param viewHolder
+     * @param viewHolder A ViewHolder describes an item view and metadata about its place
+     *                   within the RecyclerView.
      */
-    protected void bindViewHelper(IconBaseViewHolder viewHolder) {
+    void bindViewHelper(IconBaseViewHolder viewHolder) {
         Context context = viewHolder.itemView.getContext();
 
         //set the identifier from the drawerItem here. It can be used to run tests
@@ -93,7 +100,9 @@ public abstract class BasePrimaryIconDrawerItem <T, VH extends BaseViewHolder>
         ColorStateList selectedTextColor = getTextColorStateList(color,
                 getSelectedTextColor(context));
         //get the correct color for the icon
+        @SuppressWarnings("unused")
         int iconColor = getIconColor(context);
+        @SuppressWarnings("unused")
         int selectedIconColor = getSelectedIconColor(context);
 
         //set the background for the item

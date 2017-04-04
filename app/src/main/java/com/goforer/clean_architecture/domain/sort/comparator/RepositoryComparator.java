@@ -10,6 +10,6 @@ public class RepositoryComparator implements Comparator<Repository> {
 
     @Override
     public int compare(Repository repos1, Repository repos2) {
-        return repos2.getStarCount() - repos1.getStarCount();
+        return repos2.stargazers_count() - repos1.stargazers_count();
     }
 }

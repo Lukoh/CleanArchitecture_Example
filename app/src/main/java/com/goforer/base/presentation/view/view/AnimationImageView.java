@@ -7,6 +7,7 @@ import android.support.v7.widget.AppCompatImageView;
 
 import com.goforer.clean_architecture.R;
 
+@SuppressWarnings("unused")
 public class AnimationImageView extends AppCompatImageView {
 
     AnimationDrawable mDrawable;

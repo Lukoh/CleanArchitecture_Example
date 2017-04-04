@@ -32,7 +32,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
-        if (holder instanceof ItemHolderBinder) {
+        if (holder != null) {
             if (position >= mItems.size()) {
                 return;
             }
@@ -44,7 +44,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
         }
     }
 
-    public void addItems(List<T> items) {
+    protected void addItems(List<T> items) {
         mItems = items;
     }
 
@@ -80,6 +80,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
      *
      * @param isEmptyItems true if the items is empty
      */
+    @SuppressWarnings("unused")
     public void setEmptyItems(boolean isEmptyItems) {
         mIsEmptyItems = isEmptyItems;
     }
@@ -94,21 +95,13 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     }
 
     /**
-     * Set true if the loading image is used.
-     *
-     * @param usedLoadingImage true if the loading image is used
-     */
-    public void setUsedLoadingImage(boolean usedLoadingImage) {
-        mUsedLoadingImage = usedLoadingImage;
-    }
-
-    /**
      * Scroll to the specified adapter position.
      * Actual position of the item on the screen depends on the LayoutManager implementation.
      *
      * @param layoutManager The currently bound LayoutManager
      * @param position Scroll to this adapter position
      */
+    @SuppressWarnings("unused")
     public boolean moveSelectedPosition(RecyclerView.LayoutManager layoutManager, int position) {
         if (position >= 0 && position < getItemCount()) {
             layoutManager.scrollToPosition(position);
@@ -123,6 +116,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
      *
      * @return true if the item or page is reached to the last
      */
+    @SuppressWarnings("unused")
     public boolean isReachedToLastItem() {
         return mIsReachedToLastItem;
     }
@@ -142,6 +136,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
      *
      * @return true if the items is empty
      */
+    @SuppressWarnings("unused")
     public boolean isEmptyItems() {
         return mIsEmptyItems;
     }
@@ -151,6 +146,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
      *
      * @return true if the items is loading
      */
+    @SuppressWarnings("unused")
     public boolean isLoadingItems() {
         return mIsLoadingItems;
     }
@@ -160,7 +156,17 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
      *
      * @return true if the loading image is used
      */
+    @SuppressWarnings("unused")
     public boolean usedLoadImage() {
         return mUsedLoadingImage;
+    }
+
+    /**
+     * Set true if the loading image is used.
+     *
+     * @param usedLoadingImage true if the loading image is used
+     */
+    protected void setUsedLoadingImage(boolean usedLoadingImage) {
+        mUsedLoadingImage = usedLoadingImage;
     }
 }

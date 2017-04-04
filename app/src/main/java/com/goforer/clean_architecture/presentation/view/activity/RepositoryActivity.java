@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.goforer.base.presentation.view.activity.BaseActivity;
 import com.goforer.clean_architecture.R;
-import com.goforer.clean_architecture.presentation.CleanArchitectureApplication;
+import com.goforer.clean_architecture.CleanArchitectureApplication;
 import com.goforer.clean_architecture.presentation.caller.Caller;
 import com.goforer.clean_architecture.presentation.contract.RepositoryContract;
-import com.goforer.clean_architecture.dagger.component.activity.DaggerRepositoryActivityComponent;
-import com.goforer.clean_architecture.dagger.module.AppModule;
-import com.goforer.clean_architecture.dagger.module.activity.RepositoryActivityModule;
+import com.goforer.clean_architecture.dependencyinjection.component.activity.DaggerRepositoryActivityComponent;
+import com.goforer.clean_architecture.dependencyinjection.module.AppModule;
+import com.goforer.clean_architecture.dependencyinjection.module.activity.RepositoryActivityModule;
 import com.goforer.clean_architecture.presentation.model.data.User;
 import com.goforer.clean_architecture.presentation.presenter.RepositoryPresenter;
 import com.goforer.clean_architecture.presentation.view.fragment.RepositoryFragment;
@@ -109,7 +109,7 @@ public class RepositoryActivity extends BaseActivity implements RepositoryContra
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_USE_LOGO);
-            actionBar.setTitle(mUserProfile.getName() + "'s " + getString(R.string.repository));
+            actionBar.setTitle(mUserProfile.name() + "'s " + getString(R.string.repository));
             actionBar.setElevation(1);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(false);

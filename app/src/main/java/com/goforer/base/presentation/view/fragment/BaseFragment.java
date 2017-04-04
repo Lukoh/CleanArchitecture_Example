@@ -39,6 +39,7 @@ public class BaseFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @SuppressWarnings("unused")
     public BaseActivity getBaseActivity() {
         return mActivity;
     }

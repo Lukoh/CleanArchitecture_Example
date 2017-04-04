@@ -7,7 +7,9 @@ import android.widget.ImageView;
 
 public class SlidingDrawerImageLoader {
     public enum Tags {
+        @SuppressWarnings("unused")
         COMMENT_PICTURE,
+        @SuppressWarnings("unused")
         MENU_PICTURE,
         PRIMARY_ICON
     }
@@ -34,17 +36,19 @@ public class SlidingDrawerImageLoader {
         return SINGLETON;
     }
 
+    @SuppressWarnings("unused")
     public SlidingDrawerImageLoader withHandleAllUris(boolean handleAllUris) {
         this.mHandleAllUris = handleAllUris;
         return this;
     }
 
     /**
-     * @param imageView
-     * @param uri
-     * @param tag
+     * @param imageView Displays an arbitrary image, such as an icon
+     * @param uri URI
+     * @param tag Tag
      * @return false if not consumed
      */
+    @SuppressWarnings("unused")
     public boolean setImage(ImageView imageView, Uri uri, String tag) {
         //if we do not handle all uris and are not http or https we keep the original behavior
         if (mHandleAllUris || "http".equals(uri.getScheme()) || "https".equals(uri.getScheme())) {
@@ -67,6 +71,7 @@ public class SlidingDrawerImageLoader {
         return imageLoader;
     }
 
+    @SuppressWarnings("unused")
     public void setImageLoader(IDrawerImageLoader imageLoader) {
         this.imageLoader = imageLoader;
     }
@@ -79,10 +84,10 @@ public class SlidingDrawerImageLoader {
         Drawable placeholder(Context context);
 
         /**
-         * @param ctx
+         * @param context Context
          * @param tag current possible tags: "profile", "profileDrawerItem", "accountHeader"
-         * @return
+         * @return Drawable
          */
-        Drawable placeholder(Context ctx, String tag);
+        Drawable placeholder(Context context, String tag);
     }
 }

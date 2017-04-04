@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -117,9 +118,9 @@ public class SlidingDrawer {
 
         if (mHeader == null) {
             profile = new ProfileDrawerItem()
-                    .withName(mUserProfile.getName())
-                    .withEmail(mUserProfile.getEmail())
-                    .withIcon(mUserProfile.getAvartarUrl())
+                    .withName(mUserProfile.name())
+                    .withEmail(mUserProfile.email())
+                    .withIcon(mUserProfile.avatar_url())
                     .withIdentifier(DRAWER_PROFILE_ITEM_IDENTIFIER_ID);
 
             buildHeader(activity, profile, savedInstanceState);
@@ -135,29 +136,29 @@ public class SlidingDrawer {
                 .withAccountHeader(mHeader) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.drawer_item_company)
-                                .withDescription(mUserProfile.getCompany())
+                                .withDescription(mUserProfile.company())
                                 .withIcon(R.drawable.ic_drawer_company)
                                 .withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_location)
-                                .withDescription(mUserProfile.getLocation())
+                                .withDescription(mUserProfile.location())
                                 .withIcon(R.drawable.ic_drawer_location)
                                 .withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_blog)
-                                .withDescription(mUserProfile.getBlog())
+                                .withDescription(mUserProfile.blog())
                                 .withIcon(R.drawable.ic_drawer_blog)
                                 .withSelectable(false),
                         createExpandableDrawerItem(R.drawable.ic_drawer_followers,
                                 CUSTOM_ITEM_FOLLOWER_TYPE,
                                 mActivity.getResources().getString(R.string.drawer_item_followers),
-                                mUserProfile.getFollowers(), SECONDARY_DRAWER_LEVEL),
+                                mUserProfile.followers(), SECONDARY_DRAWER_LEVEL),
                         createExpandableDrawerItem(R.drawable.ic_drawer_star,
                                 CUSTOM_ITEM_FOLLOWING_TYPE,
                                 mActivity.getResources().getString(R.string.drawer_item_following),
-                                mUserProfile.getFollowing(), SECONDARY_DRAWER_LEVEL),
+                                mUserProfile.following(), SECONDARY_DRAWER_LEVEL),
                         createExpandableDrawerItem(R.drawable.ic_drawer_repository_count,
                                 CUSTOM_ITEM_REPOSITORY_TYPE,
                                 mActivity.getResources().getString(R.string.drawer_item_repository_count),
-                                mUserProfile.getRepositoryCount(), SECONDARY_DRAWER_LEVEL)
+                                mUserProfile.public_repos(), SECONDARY_DRAWER_LEVEL)
                 ) // Add the items we want to use with our SlidingDr
                 .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
                     @Override
@@ -218,31 +219,31 @@ public class SlidingDrawer {
             case CUSTOM_ITEM_FOLLOWER_TYPE:
                 drawerItem.withName(itemName)
                         .withCount(String.valueOf(count))
-                        .withCountTextColor(mContext.getApplicationContext().getResources()
-                                .getColor(R.color.whiteLight))
+                        .withCountTextColor(ContextCompat.getColor(mContext, R.color.whiteLight))
                         .withIcon(iconRes)
                         .withIdentifier(DRAWER_PROFILE_ITEM_FOLLOWER_ID)
                         .withArrowVisible(false)
+                        .withLevel(level)
                         .withSelectable(false);
                 break;
             case CUSTOM_ITEM_FOLLOWING_TYPE:
                 drawerItem.withName(itemName)
                         .withCount(String.valueOf(count))
-                        .withCountTextColor(mContext.getApplicationContext().getResources()
-                                .getColor(R.color.whiteLight))
+                        .withCountTextColor(ContextCompat.getColor(mContext, R.color.whiteLight))
                         .withIcon(iconRes)
                         .withIdentifier(DRAWER_PROFILE_ITEM_FOLLOWING_ID)
                         .withArrowVisible(false)
+                        .withLevel(level)
                         .withSelectable(false);
                 break;
             case CUSTOM_ITEM_REPOSITORY_TYPE:
                 drawerItem.withName(itemName)
                         .withCount(String.valueOf(count))
-                        .withCountTextColor(mContext.getApplicationContext().getResources()
-                                .getColor(R.color.whiteLight))
+                        .withCountTextColor(ContextCompat.getColor(mContext, R.color.whiteLight))
                         .withIcon(iconRes)
                         .withIdentifier(DRAWER_PROFILE_ITEM_REPOSITORY_COUNT_ID)
                         .withArrowVisible(false)
+                        .withLevel(level)
                         .withSelectable(false);
                 break;
             default:

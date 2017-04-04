@@ -15,7 +15,8 @@ public interface ItemHolderBinder<T> {
      * Called by RecyclerView to display the item at the specified position. This method
      * should update the contents of the item's view to reflect the item at the given position.
      *
-     * @param holder
+     * @param holder A BaseViewHolder describes an item view and metadata about its place within
+     *               the RecyclerView
      * @param item The ItemHolder which should be updated to represent the contents of the
      *        item at the given position in the data set
      * @param position The position of the item within the adapter's data set.

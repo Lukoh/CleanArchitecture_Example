@@ -15,10 +15,11 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-public class RoundDrawable extends Drawable {
-    public static final int DEFAULT_BORDER_COLOR = Color.BLACK;
+class RoundDrawable extends Drawable {
+    static final int DEFAULT_BORDER_COLOR = Color.BLACK;
 
     private final RectF mBounds = new RectF();
     private final RectF mDrawableRect = new RectF();
@@ -40,11 +41,12 @@ public class RoundDrawable extends Drawable {
 
     private boolean mRebuildShader = true;
     private boolean mOval = false;
+    private boolean mOnlyTopCorner = false;
 
     private float mCornerRadius = 0;
     private float mBorderWidth = 0;
 
-    public RoundDrawable(Bitmap bitmap) {
+    private RoundDrawable(Bitmap bitmap) {
         mBitmap = bitmap;
 
         mBitmapWidth = bitmap.getWidth();
@@ -66,9 +68,10 @@ public class RoundDrawable extends Drawable {
      * Create the new RoundDrawable with the given Bitmap
      *
      * @param bitmap the given Bitmap to create the new RoundDrawable
-     * @return
+     * @return RoundDrawable
      */
-    public static RoundDrawable fromBitmap(Bitmap bitmap) {
+    @SuppressWarnings("unused")
+    static RoundDrawable fromBitmap(Bitmap bitmap) {
         if (bitmap != null) {
             return new RoundDrawable(bitmap);
         } else {
@@ -83,7 +86,8 @@ public class RoundDrawable extends Drawable {
      *
      * @return the checked drawable
      */
-    public static Drawable fromDrawable(Drawable drawable) {
+    @SuppressWarnings("unused")
+    static Drawable fromDrawable(Drawable drawable) {
         if (drawable != null) {
             if (drawable instanceof RoundDrawable) {
                 // just return if it's already a RoundDrawable
@@ -116,7 +120,7 @@ public class RoundDrawable extends Drawable {
      *
      * @return A Bitmap created from the drawable parameter.
      */
-    public static Bitmap drawableToBitmap(Drawable drawable) {
+    private static Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
@@ -137,6 +141,7 @@ public class RoundDrawable extends Drawable {
         return bitmap;
     }
 
+    @SuppressWarnings("unused")
     public Bitmap getBitmap() {
         return mBitmap;
     }
@@ -261,7 +266,7 @@ public class RoundDrawable extends Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         BitmapShader mBitmapShader;
 
         if (mRebuildShader) {
@@ -324,6 +329,7 @@ public class RoundDrawable extends Drawable {
     }
 
     @Override
+    @Deprecated
     public void setDither(boolean dither) {
         mBitmapPaint.setDither(dither);
         invalidateSelf();
@@ -345,26 +351,26 @@ public class RoundDrawable extends Drawable {
         return mBitmapHeight;
     }
 
+    @SuppressWarnings("unused")
     public float getCornerRadius() {
         return mCornerRadius;
     }
 
-    public RoundDrawable setCornerRadius(float radius) {
+    RoundDrawable setCornerRadius(float radius) {
         mCornerRadius = radius;
         return this;
     }
 
-    boolean mOnlyTopCorner = false;
-
-    public void setOnlyTopCorner(boolean onlyTopCorner) {
+    void setOnlyTopCorner(boolean onlyTopCorner) {
         mOnlyTopCorner = onlyTopCorner;
     }
 
+    @SuppressWarnings("unused")
     public float getBorderWidth() {
         return mBorderWidth;
     }
 
-    public RoundDrawable setBorderWidth(float width) {
+    RoundDrawable setBorderWidth(float width) {
         mBorderWidth = width;
         mBorderPaint.setStrokeWidth(mBorderWidth);
         return this;
@@ -375,10 +381,12 @@ public class RoundDrawable extends Drawable {
      *
      * @return the the RoundDrawable's default border color
      */
+    @SuppressWarnings("unused")
     public int getBorderColor() {
         return mBorderColor.getDefaultColor();
     }
 
+    @SuppressWarnings("unused")
     public RoundDrawable setBorderColor(int color) {
         return setBorderColor(ColorStateList.valueOf(color));
     }
@@ -389,6 +397,7 @@ public class RoundDrawable extends Drawable {
      * @return a set of state spec / color pairs
      * @see ColorStateList
      */
+    @SuppressWarnings("unused")
     public ColorStateList getBorderColors() {
         return mBorderColor;
     }
@@ -402,17 +411,18 @@ public class RoundDrawable extends Drawable {
      * @return The current Drawable that will be used by this drawable. For simple Drawables, this
      *         is just the Drawable itself.
      */
-    public RoundDrawable setBorderColor(ColorStateList colors) {
+    RoundDrawable setBorderColor(ColorStateList colors) {
         mBorderColor = colors != null ? colors : ColorStateList.valueOf(0);
         mBorderPaint.setColor(mBorderColor.getColorForState(getState(), DEFAULT_BORDER_COLOR));
         return this;
     }
 
+    @SuppressWarnings("unused")
     public boolean isOval() {
         return mOval;
     }
 
-    public RoundDrawable setOval(boolean oval) {
+    RoundDrawable setOval(boolean oval) {
         mOval = oval;
         return this;
     }
@@ -426,6 +436,7 @@ public class RoundDrawable extends Drawable {
      *
      * @return Option for scaling the bounds of an image to the bounds of this view
      */
+    @SuppressWarnings("unused")
     public ImageView.ScaleType getScaleType() {
         return mScaleType;
     }
@@ -441,7 +452,7 @@ public class RoundDrawable extends Drawable {
      * @return The current Drawable that will be used by this drawable. For simple Drawables, this
      *         is just the Drawable itself.
      */
-    public RoundDrawable setScaleType(ImageView.ScaleType scaleType) {
+    RoundDrawable setScaleType(ImageView.ScaleType scaleType) {
         if (scaleType == null) {
             scaleType = ImageView.ScaleType.FIT_CENTER;
         }
@@ -458,6 +469,7 @@ public class RoundDrawable extends Drawable {
      * @return the shader mode
      * @see Shader.TileMode
      */
+    @SuppressWarnings("unused")
     public Shader.TileMode getTileModeX() {
         return mTileModeX;
     }
@@ -471,7 +483,7 @@ public class RoundDrawable extends Drawable {
      * @return The current Drawable that will be used by this drawable. For simple Drawables, this
      *         is just the Drawable itself.
      */
-    public RoundDrawable setTileModeX(Shader.TileMode tileModeX) {
+    RoundDrawable setTileModeX(Shader.TileMode tileModeX) {
         if (mTileModeX != tileModeX) {
             mTileModeX = tileModeX;
             mRebuildShader = true;
@@ -486,6 +498,7 @@ public class RoundDrawable extends Drawable {
      * @return the shader mode
      * @see Shader.TileMode
      */
+    @SuppressWarnings("unused")
     public Shader.TileMode getTileModeY() {
         return mTileModeY;
     }
@@ -499,7 +512,7 @@ public class RoundDrawable extends Drawable {
      * @return The current Drawable that will be used by this drawable. For simple Drawables, this
      *         is just the Drawable itself.
      */
-    public RoundDrawable setTileModeY(Shader.TileMode tileModeY) {
+    RoundDrawable setTileModeY(Shader.TileMode tileModeY) {
         if (mTileModeY != tileModeY) {
             mTileModeY = tileModeY;
             mRebuildShader = true;
@@ -508,6 +521,7 @@ public class RoundDrawable extends Drawable {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public Bitmap toBitmap() {
         return drawableToBitmap(this);
     }

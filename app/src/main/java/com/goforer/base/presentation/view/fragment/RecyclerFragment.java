@@ -36,6 +36,7 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
 
     private boolean mItemTouchHelperEnabled = false;
     private boolean mIsLoading = false;
+    @SuppressWarnings("unused")
     private boolean mIsUpdated = false;
 
     private int mTotalPage = 0;
@@ -371,6 +372,7 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
      *                    RecyclerView.
      */
     @Deprecated
+    @SuppressWarnings("unused")
     protected void startDrag(RecyclerView.ViewHolder viewHolder) {
         if (mItemTouchHelper != null && mItemTouchHelperEnabled) {
             mSwipeLayout.setRefreshing(false);
@@ -518,6 +520,7 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
         }
     }
 
+    @SuppressWarnings("unused")
     protected void clear() {
         mCurrentPage = 1;
 
@@ -598,6 +601,7 @@ public abstract class RecyclerFragment<T> extends BaseFragment {
          */
         void onScrolled(RecyclerView recyclerView, int dx, int dy);
 
+        @SuppressWarnings("unused")
         void onError(String message);
     }
 }

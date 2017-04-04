@@ -3,8 +3,6 @@ package com.goforer.base.presentation.view.helper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.goforer.base.presentation.view.fragment.RecyclerFragment;
-
 public interface ItemTouchHelperListener {
     /**
      * Called when an item has been dragged far enough to trigger a move. This is called every time

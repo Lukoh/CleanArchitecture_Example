@@ -11,6 +11,7 @@ import com.mikepenz.iconics.typeface.IIcon;
 import com.mikepenz.materialdrawer.holder.ImageHolder;
 import com.mikepenz.materialdrawer.holder.StringHolder;
 
+@SuppressWarnings("unused")
 public interface Commentable<T> extends IIdentifyable<T> {
     T withCommenter(String commenter);
 

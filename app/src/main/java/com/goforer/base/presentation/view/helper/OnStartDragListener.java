@@ -2,6 +2,7 @@ package com.goforer.base.presentation.view.helper;
 
 import android.support.v7.widget.RecyclerView;
 
+@SuppressWarnings("unused")
 public interface OnStartDragListener {
     /**
      * Called when a view is requesting a start of a drag.

@@ -12,6 +12,7 @@ public interface RepositoryContract {
     interface Presenter extends BasePresenter {
         void setRepositoryAdapterPresenter(RepositoryAdapterContract.Presenter adapterPresenter);
 
+        @SuppressWarnings("unused")
         RepositoryAdapterContract.Presenter getRepositoryAdapterPresenter();
 
         void setRepositoryAdapterView(RepositoryAdapterContract.View adapterView);

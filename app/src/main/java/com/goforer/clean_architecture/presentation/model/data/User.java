@@ -1,183 +1,81 @@
 package com.goforer.clean_architecture.presentation.model.data;
 
-
-import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.goforer.base.presentation.model.BaseModel;
-import com.google.gson.annotations.SerializedName;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
-public class User extends BaseModel implements Parcelable {
-    @SerializedName("id")
-    private long mId;
-    @SerializedName("avatar_url")
-    private String mAvatarUrl;
-    @SerializedName("gravatar_id")
-    private String mAvatarId;
-    @SerializedName("url")
-    private String mUrl;
-    @SerializedName("name")
-    private String mName;
-    @SerializedName("email")
-    private String mEmail;
-    @SerializedName("company")
-    private String mCompany;
-    @SerializedName("blog")
-    private String mBlog;
-    @SerializedName("location")
-    private String mLocation;
-    @SerializedName("public_repos")
-    private int mReposCount;
-    @SerializedName("followers")
-    private int mFollowers;
-    @SerializedName("following")
-    private int mFollowing;
+@AutoValue
+public abstract class User extends BaseModel implements Parcelable {
+    public abstract long id();
 
-    public User() {
+    @Nullable
+    public abstract String avatar_url();
+    @Nullable
+    public abstract String gravatar_id();
+    @Nullable
+    public abstract String url();
+    @Nullable
+    public abstract String name();
+    @Nullable
+    public abstract String email();
+    @Nullable
+    public abstract String company();
+    @Nullable
+    public abstract String blog();
+    @Nullable
+    public abstract String location();
+
+    public abstract int public_repos();
+    public abstract int followers();
+    public abstract int following();
+
+    public static User create(long id, @Nullable String avatar_url, @Nullable String gravatar_id,
+                              @Nullable String url, @Nullable String name, @Nullable String email,
+                              @Nullable String company, @Nullable String blog, @Nullable String location,
+                              int public_repos, int followers, int following) {
+        return builder()
+                .id(id)
+                .avatar_url(avatar_url)
+                .gravatar_id(gravatar_id)
+                .url(url)
+                .name(name)
+                .email(email)
+                .company(company)
+                .blog(blog)
+                .location(location)
+                .public_repos(public_repos)
+                .followers(followers)
+                .following(following)
+                .build();
     }
 
-    public long getId() {
-        return mId;
+    @SuppressWarnings("WeakerAccess")
+    public static TypeAdapter<User> typeAdapter(Gson gson) {
+        return new AutoValue_User.GsonTypeAdapter(gson);
     }
 
-    public void setId(long id) {
-        mId = id;
+    public static Builder builder() {
+        return new AutoValue_User.Builder();
     }
 
-    public String getAvartarUrl() {
-        return mAvatarUrl;
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder id(long id);
+        public abstract Builder avatar_url(@Nullable String url);
+        public abstract Builder gravatar_id(@Nullable String id);
+        public abstract Builder url(@Nullable String url);
+        public abstract Builder name(@Nullable String name);
+        public abstract Builder email(@Nullable String email);
+        public abstract Builder company(@Nullable String company);
+        public abstract Builder blog(@Nullable String blog);
+        public abstract Builder location(@Nullable String location);
+        public abstract Builder public_repos(int count);
+        public abstract Builder followers(int followers);
+        public abstract Builder following(int following);
+        public abstract User build();
     }
-
-    public void setAvartarUrl(String avartarUrl) {
-        mAvatarUrl = avartarUrl;
-    }
-
-    public String getAvartarId() {
-        return mAvatarId;
-    }
-
-    public void setAvartarId(String avartarId) {
-        mAvatarId = avartarId;
-    }
-
-    public String getUrl() {
-        return mUrl;
-    }
-
-    public void setUrl(String url) {
-        mUrl = url;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
-    public String getEmail() {
-        return mEmail;
-    }
-
-    public void setEmail(String email) {
-        mEmail = email;
-    }
-
-    public String getCompany() {
-        return mCompany;
-    }
-
-    public void setCompany(String company) {
-        mCompany = company;
-    }
-
-    public String getBlog() {
-        return mBlog;
-    }
-
-    public void setBlog(String blog) {
-        mBlog = blog;
-    }
-
-    public String getLocation() {
-        return mLocation;
-    }
-
-    public void setLocation(String location) {
-        mLocation = location;
-    }
-
-    public int getRepositoryCount() {
-        return mReposCount;
-    }
-
-    public void setRepositoryCount(int reposCount) {
-        mReposCount = reposCount;
-    }
-
-    public int getFollowing() {
-        return mFollowing;
-    }
-
-    public void setFollowing(int following) {
-        mFollowing = following;
-    }
-
-    public int getFollowers() {
-        return mFollowers;
-    }
-
-    public void setFollowers(int followers) {
-        mFollowers = followers;
-    }
-
-    protected User(Parcel in) {
-        mId = in.readLong();
-        mAvatarUrl = in.readString();
-        mAvatarId = in.readString();
-        mUrl = in.readString();
-        mName = in.readString();
-        mEmail = in.readString();
-        mCompany = in.readString();
-        mBlog = in.readString();
-        mLocation = in.readString();
-        mReposCount = in.readInt();
-        mFollowers = in.readInt();
-        mFollowing = in.readInt();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mId);
-        dest.writeString(mAvatarUrl);
-        dest.writeString(mAvatarId);
-        dest.writeString(mUrl);
-        dest.writeString(mName);
-        dest.writeString(mEmail);
-        dest.writeString(mCompany);
-        dest.writeString(mBlog);
-        dest.writeString(mLocation);
-        dest.writeInt(mReposCount);
-        dest.writeInt(mFollowers);
-        dest.writeInt(mFollowing);
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 }

@@ -15,6 +15,7 @@ import com.mikepenz.materialdrawer.model.BaseDrawerItem;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
 
+@SuppressWarnings("unchecked")
 public abstract class CountPanelDrawerItem<T, VH extends CountPanelViewHolder>
         extends BaseDrawerItem<T, VH> {
     private StringHolder count;
@@ -26,6 +27,7 @@ public abstract class CountPanelDrawerItem<T, VH extends CountPanelViewHolder>
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withCount(@StringRes int countRes) {
         this.count = new StringHolder(countRes);
         return (T) this;
@@ -36,26 +38,28 @@ public abstract class CountPanelDrawerItem<T, VH extends CountPanelViewHolder>
         return (T) this;
     }
 
+    @SuppressWarnings("unused")
     public T withCountTextColorRes(@ColorRes int colorRes) {
         this.countTextColor = ColorHolder.fromColorRes(colorRes);
         return (T) this;
     }
 
 
-    public StringHolder getCount() {
+    private StringHolder getCount() {
         return count;
     }
 
-    public ColorHolder getCountTextColor() {
+    private ColorHolder getCountTextColor() {
         return countTextColor;
     }
 
     /**
      * a helper method to have the logic for all secondaryDrawerItems only once
      *
-     * @param viewHolder
+     * @param viewHolder A ViewHolder describes an item view and metadata about its place
+     *                   within the RecyclerView.
      */
-    protected void bindViewHelper(CountPanelViewHolder viewHolder) {
+    void bindViewHelper(CountPanelViewHolder viewHolder) {
         Context context = viewHolder.itemView.getContext();
 
         //set the identifier from the drawerItem here. It can be used to run tests

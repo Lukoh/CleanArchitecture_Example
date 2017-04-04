@@ -3,6 +3,7 @@ package com.goforer.base.presentation.view.view;
 import android.content.Context;
 import android.util.AttributeSet;
 
+@SuppressWarnings("unused")
 public class ThreeTwoImageView extends ForegroundImageView {
 
     public ThreeTwoImageView(Context context, AttributeSet attrs) {
