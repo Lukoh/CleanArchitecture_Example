@@ -1,7 +1,7 @@
 package com.goforer.clean_architecture.repository.netcarrier;
 
-import com.goforer.clean_architecture.presentation.model.data.Repository;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.Repository;
+import com.goforer.clean_architecture.repository.model.data.User;
 
 import java.util.List;
 

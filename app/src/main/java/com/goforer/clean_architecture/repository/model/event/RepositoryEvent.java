@@ -1,4 +1,4 @@
-package com.goforer.clean_architecture.presentation.model.event;
+package com.goforer.clean_architecture.repository.model.event;
 
 public class RepositoryEvent extends ResponseRepositoryEvent {
 }

@@ -1,8 +1,8 @@
 package com.goforer.clean_architecture.repository.netcarrier.callback;
 
 import com.goforer.clean_architecture.presentation.contract.SplashContract.View;
-import com.goforer.clean_architecture.presentation.model.data.User;
-import com.goforer.clean_architecture.presentation.model.event.ResponseUserEvent;
+import com.goforer.clean_architecture.repository.model.data.User;
+import com.goforer.clean_architecture.repository.model.event.ResponseUserEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

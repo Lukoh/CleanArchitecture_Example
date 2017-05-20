@@ -1,10 +1,10 @@
-package com.goforer.clean_architecture.presentation.model.event;
+package com.goforer.clean_architecture.repository.model.event;
 
 import android.content.Context;
 
 import com.goforer.base.presentation.model.event.ResponseEvent;
 import com.goforer.clean_architecture.presentation.contract.RepositoryAdapterContract.View;
-import com.goforer.clean_architecture.presentation.model.data.Repository;
+import com.goforer.clean_architecture.repository.model.data.Repository;
 
 import java.util.List;
 

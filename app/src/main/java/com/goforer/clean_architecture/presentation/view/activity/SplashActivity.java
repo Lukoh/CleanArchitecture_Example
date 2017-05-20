@@ -15,7 +15,7 @@ import com.goforer.clean_architecture.presentation.contract.SplashContract;
 import com.goforer.clean_architecture.dependencyinjection.component.activity.DaggerSplashActivityComponent;
 import com.goforer.clean_architecture.dependencyinjection.module.AppModule;
 import com.goforer.clean_architecture.dependencyinjection.module.activity.SplashActivityModule;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.User;
 import com.goforer.clean_architecture.presentation.presenter.SplashPresenter;
 
 import javax.inject.Inject;

@@ -1,6 +1,6 @@
 package com.goforer.clean_architecture.domain.sort.comparator;
 
-import com.goforer.clean_architecture.presentation.model.data.Repository;
+import com.goforer.clean_architecture.repository.model.data.Repository;
 
 import java.util.Comparator;
 

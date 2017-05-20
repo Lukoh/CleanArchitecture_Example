@@ -16,7 +16,7 @@ import com.goforer.clean_architecture.presentation.contract.RepositoryContract;
 import com.goforer.clean_architecture.dependencyinjection.component.activity.DaggerRepositoryActivityComponent;
 import com.goforer.clean_architecture.dependencyinjection.module.AppModule;
 import com.goforer.clean_architecture.dependencyinjection.module.activity.RepositoryActivityModule;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.User;
 import com.goforer.clean_architecture.presentation.presenter.RepositoryPresenter;
 import com.goforer.clean_architecture.presentation.view.fragment.RepositoryFragment;
 

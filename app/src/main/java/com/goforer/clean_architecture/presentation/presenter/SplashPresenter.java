@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.goforer.clean_architecture.domain.repository.UserReq;
 import com.goforer.clean_architecture.presentation.contract.SplashContract;
 import com.goforer.clean_architecture.presentation.contract.SplashContract.View;
-import com.goforer.clean_architecture.presentation.model.event.UserProfileEvent;
+import com.goforer.clean_architecture.repository.model.event.UserProfileEvent;
 import com.goforer.clean_architecture.repository.request.UserReqImpl;
 
 import org.greenrobot.eventbus.EventBus;

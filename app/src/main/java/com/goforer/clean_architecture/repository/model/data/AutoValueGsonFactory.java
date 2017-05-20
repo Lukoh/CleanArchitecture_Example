@@ -1,4 +1,4 @@
-package com.goforer.clean_architecture.presentation.model.data;
+package com.goforer.clean_architecture.repository.model.data;
 
 import com.google.gson.TypeAdapterFactory;
 import com.ryanharter.auto.value.gson.GsonTypeAdapterFactory;

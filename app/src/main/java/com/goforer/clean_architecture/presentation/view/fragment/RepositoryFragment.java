@@ -22,7 +22,7 @@ import com.goforer.clean_architecture.presentation.contract.RepositoryContract;
 import com.goforer.clean_architecture.dependencyinjection.component.fragment.DaggerRepositoryFragmentComponent;
 import com.goforer.clean_architecture.dependencyinjection.module.AppModule;
 import com.goforer.clean_architecture.dependencyinjection.module.fragment.RepositoryFragmentModule;
-import com.goforer.clean_architecture.presentation.model.data.Repository;
+import com.goforer.clean_architecture.repository.model.data.Repository;
 import com.goforer.clean_architecture.presentation.presenter.RepositoryPresenter;
 import com.goforer.clean_architecture.presentation.view.activity.RepositoryActivity;
 import com.goforer.clean_architecture.presentation.view.activity.SplashActivity;

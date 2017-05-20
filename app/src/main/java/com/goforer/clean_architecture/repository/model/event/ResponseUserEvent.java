@@ -1,8 +1,8 @@
-package com.goforer.clean_architecture.presentation.model.event;
+package com.goforer.clean_architecture.repository.model.event;
 
 import com.goforer.base.presentation.model.event.ResponseEvent;
 import com.goforer.clean_architecture.presentation.contract.SplashContract.View;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.User;
 
 public class ResponseUserEvent extends ResponseEvent{
     protected User mResponse;

@@ -1,6 +1,6 @@
 package com.goforer.clean_architecture.dependencyinjection.module.network;
 
-import com.goforer.clean_architecture.presentation.model.data.AutoValueGsonFactory;
+import com.goforer.clean_architecture.repository.model.data.AutoValueGsonFactory;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;

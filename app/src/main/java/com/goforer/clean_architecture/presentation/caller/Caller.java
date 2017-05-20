@@ -15,7 +15,7 @@ import com.goforer.base.presentation.customtabsclient.shared.CustomTabsHelper;
 import com.goforer.base.presentation.customtabsclient.shared.ServiceConnection;
 import com.goforer.base.presentation.customtabsclient.shared.ServiceConnectionCallback;
 import com.goforer.clean_architecture.R;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.User;
 import com.goforer.clean_architecture.presentation.view.activity.RepositoryActivity;
 
 public enum Caller {

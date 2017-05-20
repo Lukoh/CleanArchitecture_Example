@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.goforer.base.presentation.view.activity.BaseActivity;
 import com.goforer.clean_architecture.R;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.User;
 import com.goforer.clean_architecture.presentation.view.view.drawer.item.CustomCountPanelDrawableItem;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.goforer.base.presentation.presenter.BasePresenter;
 import com.goforer.base.presentation.view.BaseView;
-import com.goforer.clean_architecture.presentation.model.data.User;
+import com.goforer.clean_architecture.repository.model.data.User;
 
 public interface SplashContract {
     interface View extends BaseView<SplashContract.Presenter> {

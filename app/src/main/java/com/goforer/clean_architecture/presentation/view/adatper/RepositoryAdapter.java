@@ -25,7 +25,7 @@ import com.goforer.clean_architecture.CleanArchitectureApplication;
 import com.goforer.clean_architecture.presentation.caller.Caller;
 import com.goforer.clean_architecture.presentation.contract.RepositoryAdapterContract;
 import com.goforer.clean_architecture.presentation.contract.RepositoryContract;
-import com.goforer.clean_architecture.presentation.model.data.Repository;
+import com.goforer.clean_architecture.repository.model.data.Repository;
 
 import org.greenrobot.eventbus.EventBus;
 

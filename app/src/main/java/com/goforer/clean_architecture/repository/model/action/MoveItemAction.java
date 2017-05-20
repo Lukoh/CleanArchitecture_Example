@@ -1,4 +1,4 @@
-package com.goforer.clean_architecture.presentation.model.action;
+package com.goforer.clean_architecture.repository.model.action;
 
 @SuppressWarnings("unused")
 public class MoveItemAction {

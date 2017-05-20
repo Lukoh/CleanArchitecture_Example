@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.goforer.clean_architecture.domain.repository.RepositoryReq;
 import com.goforer.clean_architecture.presentation.contract.RepositoryAdapterContract.View;
-import com.goforer.clean_architecture.presentation.model.data.Repository;
-import com.goforer.clean_architecture.presentation.model.event.ResponseRepositoryEvent;
+import com.goforer.clean_architecture.repository.model.data.Repository;
+import com.goforer.clean_architecture.repository.model.event.ResponseRepositoryEvent;
 import com.goforer.clean_architecture.repository.netcarrier.callback.ReqRepositoryCallback;
 
 import java.util.List;

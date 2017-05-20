@@ -1,4 +1,4 @@
-package com.goforer.clean_architecture.presentation.model.data;
+package com.goforer.clean_architecture.repository.model.data;
 
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
