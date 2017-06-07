@@ -10,4 +10,7 @@ You can use all source code in this project as a learning reference, or as a sta
 
 Base Android Architecture consist of Presentation layer, Domain layer and Repository layer. And new latest technologies, Clean Architecture + Dagger 2.0 + MVP design pattern, were applied into Base Android Architecture. These stuff make Android Apps to be extended being more competitive power and help them to maintain consistency.
 
+## Base Android Architecture
+
+
  
