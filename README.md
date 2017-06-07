@@ -1,5 +1,5 @@
 # Android Architecture 1.0 Blueprint
-<img src="https://github.com/Lukoh/CleanArchitecture_Example/blob/master/Architecture.png" alt="Log-in Demo" width="350" />
+<img src="https://github.com/Lukoh/CleanArchitecture_Example/blob/master/Architecture.png" alt="Log-in Demo" width="780" />
 
 The Android framework provides a lot of flexibility in deciding how to organize and architect all Android Apps. While this freedom is very valuable, it can also lead to apps with large classes, inconsistent naming schemes, as well as mismatching or missing architectures. These types of issues can make testing, maintaining and extending your apps difficult.
 The Android Architecture Blueprints project demonstrates strategies to help solve or avoid these common problems. This project implements the same app using different architectural concepts and tools.
