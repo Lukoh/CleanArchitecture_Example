@@ -12,5 +12,4 @@ Base Android Architecture consist of Presentation layer, Domain layer and Reposi
 
 ## Base Android Architecture
 
-
  
