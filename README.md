@@ -1,4 +1,4 @@
-Android Architecture 1.0 Blueprint
+# Android Architecture 1.0 Blueprint
 
 
 The Android framework provides a lot of flexibility in deciding how to organize and architect all Android Apps. While this freedom is very valuable, it can also lead to apps with large classes, inconsistent naming schemes, as well as mismatching or missing architectures. These types of issues can make testing, maintaining and extending your apps difficult.
