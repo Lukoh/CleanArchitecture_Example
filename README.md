@@ -6,7 +6,8 @@ The Android Architecture Blueprints project demonstrates strategies to help solv
 You can use all source code in this project as a learning reference, or as a starting point for creating Android apps. The focus of this project is on demonstrating how to structure your code, design your architecture, and the eventual impact of adopting these patterns on testing and maintaining Android app. You can use the techniques demonstrated here in many different ways to build apps. Your own particular priorities will impact how you implement the concepts in these projects, so you should not consider these samples to be canonical examples. To ensure the focus in kept on the aims described above, the app uses a simple UI.
  
  
-Summary
+## Summary
 
 Base Android Architecture consist of Presentation layer, Domain layer and Repository layer. And new latest technologies, Clean Architecture + Dagger 2.0 + MVP design pattern, were applied into Base Android Architecture. These stuff make Android Apps to be extended being more competitive power and help them to maintain consistency.
 
+ 
